@@ -1,0 +1,48 @@
+minikube status
+minikube start --driver=docker
+ssh -i ~/.minikube/machines/minikube/id_rsa docker@$(minikube ip)
+minikube ssh
+kubectl cluster-info
+kubectl get nodes or pods or namespaces
+kubectl get pods --namespace=kube-system
+kubectl run nginx --image=nginx
+kubectl describe pod nginx ==> podname
+docker ps | grep nginx
+docker exec -it fc307044d18a sh
+
+hostname __ -i
+kubectl get pods -o wide
+kubectl delete pods nginx
+alias k="kubectl"
+k create deployment nginx-deployment --image=nginx
+k get deployments
+k describe deployments nginx-deployments
+k scale deployment nginx-deployment --replicas=5
+k get deploy
+k expose deployments nginx-deployment --port=8080 --target-port=80
+k get services ==> svc
+login to ssh docker and curl 10.106.150.15:8080
+
+k create deployment k8s-web-hello --image=shivamlikhar/k8s-web-hello
+k expose deployments k8s-web-hello --port=3000
+
+k scale deployment k8s-web-hello --replicas=4
+k expose deployments k8s-web-hello --type=NodePort --port=3000
+minikube service k8s-web-hello 
+minikube service k8s-web-hello --url
+k expose deployments k8s-web-hello --type=LoadBalancer --port=3000
+k set image deployment k8s-web-hello=shivamlikhar/k8s-web-hello:2.0.0
+k rollout status deploy k8s-web-hello
+
+k delete pods 213213213
+minikube dashboard
+k delete all --all
+kubectl apply -f deployment.yaml
+k delete -f deployment.yaml -f service.yaml
+k apply -f k8s-web-to-nginx.yaml -f nginx.yaml
+
+k exec k8s-web-to-nginx-75484bb697-75zxb -- nslookup nginx
+										 -- wget -q0- http://nginx
+										 
+minikube start --driver=virtualbox --container-runtime=cri-o | containerd
+
